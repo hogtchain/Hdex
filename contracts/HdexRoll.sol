@@ -83,8 +83,8 @@ library HdexLibrary {
 contract HdexRoll {
     using SafeERC20 for IERC20;
 
-    IHdexRouter public oldRouter;
-    IHdexRouter public router;
+    IHdexRouter public immutable oldRouter;
+    IHdexRouter public immutable router;
 
     constructor(IHdexRouter _oldRouter, IHdexRouter _router) public {
         oldRouter = _oldRouter;

@@ -127,6 +127,7 @@ contract HdexPair is IHdexPair, HdexERC20 {
     }
 
     function burn(address to) external lock returns (uint amount0, uint amount1) {
+        require(totalSupply != 0, "Hdex: The value of totalSupply must not be 0");
         (uint112 _reserve0, uint112 _reserve1,) = getReserves();
         address _token0 = token0;                                
         address _token1 = token1;                                

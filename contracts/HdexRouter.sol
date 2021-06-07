@@ -394,12 +394,12 @@ contract HdexRouter is IHdexRouter {
     }
 
 
-    function quote(uint amountA, uint reserveA, uint reserveB) public pure virtual override returns (uint amountB) {
+    function quote(uint amountA, uint reserveA, uint reserveB) external pure virtual override returns (uint amountB) {
         return HdexLibrary.quote(amountA, reserveA, reserveB);
     }
 
     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut)
-        public
+        external
         pure
         virtual
         override
@@ -409,7 +409,7 @@ contract HdexRouter is IHdexRouter {
     }
 
     function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut)
-        public
+        external
         pure
         virtual
         override
@@ -418,8 +418,8 @@ contract HdexRouter is IHdexRouter {
         return HdexLibrary.getAmountIn(amountOut, reserveIn, reserveOut);
     }
 
-    function getAmountsOut(uint amountIn, address[] memory path)
-        public
+    function getAmountsOut(uint amountIn, address[] calldata path)
+        external
         view
         virtual
         override
@@ -428,8 +428,8 @@ contract HdexRouter is IHdexRouter {
         return HdexLibrary.getAmountsOut(factory, amountIn, path);
     }
 
-    function getAmountsIn(uint amountOut, address[] memory path)
-        public
+    function getAmountsIn(uint amountOut, address[] calldata path)
+        external
         view
         virtual
         override

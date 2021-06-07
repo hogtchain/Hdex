@@ -55,6 +55,9 @@ contract HdexERC20 is IHdexERC20 {
     }
 
     function _transfer(address from, address to, uint value) private {
+        require(value >= 0, "Hdex: transfer amount is greater than 0");
+        require(value <= balanceOf[from], "Hdex: transfer amount exceeds balance");
+
         balanceOf[from] = balanceOf[from].sub(value);
         balanceOf[to] = balanceOf[to].add(value);
         emit Transfer(from, to, value);

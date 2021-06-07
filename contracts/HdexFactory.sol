@@ -24,6 +24,8 @@ contract HdexFactory is IHdexFactory {
     address[] public allPairs;
 
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+    event UpdateFeeTo(address indexed oldFeeTo, address indexed newFeeTo);
+    event UpdateFeeToSetter(address indexed oldFeeToSetter, address indexed newFeeToSetter);
 
     constructor(address _feeToSetter) public {
         feeToSetter = _feeToSetter;
@@ -52,12 +54,18 @@ contract HdexFactory is IHdexFactory {
 
     function setFeeTo(address _feeTo) external {
         require(msg.sender == feeToSetter, 'Hdex: FORBIDDEN');
+        require(_feeTo != address(0), "Hdex: Address zero is forbidden");
+        address oldFeeTo = feeTo;
         feeTo = _feeTo;
+        emit UpdateFeeTo(oldFeeTo, feeTo);
     }
 
     function setFeeToSetter(address _feeToSetter) external {
         require(msg.sender == feeToSetter, 'Hdex: FORBIDDEN');
+        require(_feeToSetter != address(0), "Hdex: Address zero is forbidden");
+        address oldFeeToSetter = feeToSetter;
         feeToSetter = _feeToSetter;
+        emit UpdateFeeToSetter(oldFeeToSetter, feeToSetter);
     }
 }
 
